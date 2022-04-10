@@ -11,13 +11,13 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Ground
+  - Enviroment
+  - Characters
+  - Bomb
+  - Fx
+  - Player
+  - EnemyCheckArea
   - 
   - 
   - 
@@ -46,4 +46,7 @@ TagManager:
     locked: 0
   - name: Platform
     uniqueID: 421176399
+    locked: 0
+  - name: Charactors
+    uniqueID: 4033396307
     locked: 0
