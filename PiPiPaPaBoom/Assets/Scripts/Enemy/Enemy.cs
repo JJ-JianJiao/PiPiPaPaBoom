@@ -10,10 +10,11 @@ public class Enemy : MonoBehaviour
     public float speed;
 
     [Header("Attack Settings")]
+    public float attackRate;
+    public float attackRange;
+    public float skillRange;
     private float nextAttack = 0;
-    private float attackRate;
-    private float attackRange;
-    private float skillRange;
+
 
     public Transform pointA, pointB;    //guard pointA and pointB
     public Transform targetPoint;
@@ -26,13 +27,22 @@ public class Enemy : MonoBehaviour
     public PatrolState patrolState = new PatrolState();
     public AttackState attackState = new AttackState();
 
+    [Header("Health State")]
+    public float currentHealth;
+    public float fullHealth;
+    public bool isDead;
+
+    private GameObject findPlayerSign;
+
     public virtual void Init() {
         anim = GetComponent<Animator>();
+        findPlayerSign = transform.GetChild(0).gameObject;
     }
 
     private void Awake()
     {
         Init();
+        currentHealth = fullHealth;
     }
 
     // Start is called before the first frame update
@@ -44,6 +54,11 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isDead) {
+            anim.SetBool("Die", isDead);
+            return;
+        }
+
         currentState.OnUpdate(this);
         anim.SetInteger("state", animState);
     }
@@ -54,11 +69,28 @@ public class Enemy : MonoBehaviour
     }
 
     public void BasicAttack() {    //attack player
-        Debug.Log("basic attack");
+        if (Vector2.Distance(transform.position, targetPoint.position) <= attackRange) {
+            if (Time.time > nextAttack) {
+                nextAttack = Time.time + attackRate;
+                //play attack animation
+                Debug.Log("basic attack");
+
+                anim.SetTrigger("attack");
+            }
+        }
     }
 
     public virtual void SkillAttack() { //interact with the bomb
-        Debug.Log("Skill attack");
+        if (Vector2.Distance(transform.position, targetPoint.position) <= skillRange)
+        {
+            if (Time.time > nextAttack)
+            {
+                nextAttack = Time.time + attackRate;
+                //play attack animation
+                Debug.Log("Skill attack");
+                anim.SetTrigger("skill");
+            }
+        }
     }
 
     public void MovementToTarget() {
@@ -90,13 +122,42 @@ public class Enemy : MonoBehaviour
 
     public void OnTriggerStay2D(Collider2D collision)
     {
-        if(!attackTargetList.Contains(collision.transform))
-            attackTargetList.Add(collision.transform);
+        if (!attackTargetList.Contains(collision.transform)) {
+            if (collision.CompareTag("Player") )
+            {
+                if(!collision.GetComponent<PilipalaController>().isdead)
+                    attackTargetList.Add(collision.transform);
+                return;
+            }
+            else {
+                attackTargetList.Add(collision.transform);
+                return;
+            }
+        }
+
+        if (collision.CompareTag("Player") && attackTargetList.Contains(collision.transform)) {
+            if (collision.GetComponent<PilipalaController>().isdead) {
+                attackTargetList.Remove(collision.transform);
+                return;
+            }
+        }
+       
     }
 
     public void OnTriggerExit2D(Collider2D collision)
     {
         if (attackTargetList.Contains(collision.transform))
             attackTargetList.Remove(collision.transform);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        StartCoroutine(OnAlarm());
+    }
+
+    IEnumerator OnAlarm() {
+        findPlayerSign.SetActive(true);
+        yield return new WaitForSeconds(findPlayerSign.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0)[0].clip.length);
+        findPlayerSign.SetActive(false);
     }
 }

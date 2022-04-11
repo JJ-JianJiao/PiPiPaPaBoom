@@ -127,7 +127,7 @@ Rigidbody2D:
   m_Material: {fileID: 6200000, guid: fe91bc04ab06e4308b4f10eaa5b3aaab, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!58 &248239685893276980
 CircleCollider2D:
@@ -162,5 +162,6 @@ MonoBehaviour:
   explotionRadius: 1.6
   targetLayer:
     serializedVersion: 2
-    m_Bits: 896
+    m_Bits: 11136
   explotionForce: 10
+  damage: 10

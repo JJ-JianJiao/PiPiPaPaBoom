@@ -15,6 +15,7 @@ public class Bomb : MonoBehaviour
     public float explotionForce;
 
 
+    public float damage;
     private void Start()
     {
         anim = GetComponent<Animator>();
@@ -25,9 +26,14 @@ public class Bomb : MonoBehaviour
 
     private void Update()
     {
-        if (Time.time > startTime + waitTime) {
-            anim.Play("BombExplotion");
+        if (!anim.GetCurrentAnimatorStateInfo(0).IsName("BombOff"))
+        {
 
+            if (Time.time > startTime + waitTime)
+            {
+                anim.Play("BombExplotion");
+
+            }
         }
     }
 
@@ -46,11 +52,32 @@ public class Bomb : MonoBehaviour
         {
             Vector3 itemPos = transform.position - item.transform.position;
             item.GetComponent<Rigidbody2D>().AddForce((-itemPos+Vector3.up) * explotionForce, ForceMode2D.Impulse);
+
+            if (item.CompareTag("Bomb") && item.GetComponent<Bomb>().anim.GetCurrentAnimatorStateInfo(0).IsName("BombOff")) {
+                item.GetComponent<Bomb>().TurnOn();
+            }
+            if (item.CompareTag("Player")) {
+                item.GetComponent<IDamageable>().GetHit(damage);
+            }
+            if (item.CompareTag("Enemy")) {
+                item.GetComponent<IDamageable>().GetHit(damage);
+            }
         }
 
     }
 
     public void DestroyThis() {
         Destroy(this.gameObject);
+    }
+
+    public void TurnOff() {
+        anim.Play("BombOff");
+        gameObject.layer = LayerMask.NameToLayer("NoFireBomb");
+    }
+
+    public void TurnOn() {
+        startTime = Time.time;
+        anim.Play("BombOn");
+        gameObject.layer = LayerMask.NameToLayer("Bomb");
     }
 }

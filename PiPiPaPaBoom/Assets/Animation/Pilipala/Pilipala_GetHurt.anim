@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BombOff
+  m_Name: Pilipala_GetHurt
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -16,30 +16,25 @@ AnimationClip:
   m_EulerCurves: []
   m_PositionCurves: []
   m_ScaleCurves: []
-  m_FloatCurves:
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: -1
-        inSlope: Infinity
-        outSlope: Infinity
-        tangentMode: 103
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_SortingOrder
-    path: 
-    classID: 212
-    script: {fileID: 0}
+  m_FloatCurves: []
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: d4a58a9e52acc4a27b73fa78e9bf04c3, type: 3}
+      value: {fileID: 21300000, guid: 9f7c15fd51cef49b48898f05294938b7, type: 3}
+    - time: 0.05
+      value: {fileID: 21300000, guid: 21c519ed2b2eb4250b9e091c3e0f6de3, type: 3}
+    - time: 0.1
+      value: {fileID: 21300000, guid: 7ef6f4232c75e47f493e2366d31b3387, type: 3}
+    - time: 0.15
+      value: {fileID: 21300000, guid: 551b6e173554943e3934275d2a61f8db, type: 3}
+    - time: 0.2
+      value: {fileID: 21300000, guid: c11d3924e93f34e1f8530da0c5e13864, type: 3}
+    - time: 0.25
+      value: {fileID: 21300000, guid: f94d1cdbcf9964f87b0c370f049be201, type: 3}
+    - time: 0.3
+      value: {fileID: 21300000, guid: 9f7c15fd51cef49b48898f05294938b7, type: 3}
+    - time: 0.35
+      value: {fileID: 21300000, guid: 27dea5c4bb8df4260ae2afb3030c0b50, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -53,26 +48,26 @@ AnimationClip:
     genericBindings:
     - serializedVersion: 2
       path: 0
-      attribute: 3762991556
-      script: {fileID: 0}
-      typeID: 212
-      customType: 26
-      isPPtrCurve: 0
-    - serializedVersion: 2
-      path: 0
       attribute: 0
       script: {fileID: 0}
       typeID: 212
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: d4a58a9e52acc4a27b73fa78e9bf04c3, type: 3}
+    - {fileID: 21300000, guid: 9f7c15fd51cef49b48898f05294938b7, type: 3}
+    - {fileID: 21300000, guid: 21c519ed2b2eb4250b9e091c3e0f6de3, type: 3}
+    - {fileID: 21300000, guid: 7ef6f4232c75e47f493e2366d31b3387, type: 3}
+    - {fileID: 21300000, guid: 551b6e173554943e3934275d2a61f8db, type: 3}
+    - {fileID: 21300000, guid: c11d3924e93f34e1f8530da0c5e13864, type: 3}
+    - {fileID: 21300000, guid: f94d1cdbcf9964f87b0c370f049be201, type: 3}
+    - {fileID: 21300000, guid: 9f7c15fd51cef49b48898f05294938b7, type: 3}
+    - {fileID: 21300000, guid: 27dea5c4bb8df4260ae2afb3030c0b50, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.05
+    m_StopTime: 0.4
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -87,26 +82,7 @@ AnimationClip:
     m_KeepOriginalPositionXZ: 0
     m_HeightFromFeet: 0
     m_Mirror: 0
-  m_EditorCurves:
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: -1
-        inSlope: Infinity
-        outSlope: Infinity
-        tangentMode: 103
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_SortingOrder
-    path: 
-    classID: 212
-    script: {fileID: 0}
+  m_EditorCurves: []
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0

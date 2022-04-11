@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PilipalaController : MonoBehaviour
+public class PilipalaController : MonoBehaviour, IDamageable
 {
     private Rigidbody2D rb;
+    private Animator anim;
     public float speed;
     public float jumpForce;
 
@@ -31,22 +32,40 @@ public class PilipalaController : MonoBehaviour
     public float nextAttack = 0;
     public float attackRate;
 
+    [Header("Player State")]
+    public float currentHealth;
+    public float fullHealth;
+    public bool isdead;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        
+        anim = GetComponent<Animator>();
+        currentHealth = fullHealth;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (isdead)
+        {
+            anim.SetBool("Dead", isdead);
+            return;
+        }
+
         CheckInput();
-        PhysicsChek();
+        //anim.SetBool("Dead", isdead);
     }
 
     private void FixedUpdate()
     {
+        if (isdead) {
+            rb.velocity = Vector2.zero;
+            return;
+        }
+        PhysicsChek();
+
         Movement();
         Jump();
     }
@@ -91,7 +110,8 @@ public class PilipalaController : MonoBehaviour
     public void Attack() {
         if (Time.time > nextAttack) {
 
-            Instantiate(bombPrefab, transform.position, Quaternion.identity);
+            var bomb = Instantiate(bombPrefab, transform.position, Quaternion.identity);
+            bomb.GetComponent<SpriteRenderer>().sortingOrder = Random.Range(0, 2) == 1 ? 10 : -10;
             nextAttack = Time.time + attackRate;
         }
 
@@ -118,5 +138,17 @@ public class PilipalaController : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+    }
+
+    public void GetHit(float damage)
+    {
+        if (anim.GetCurrentAnimatorStateInfo(1).IsName("Pilipala_GetHurt"))
+            return;
+        currentHealth -= damage;
+        if (currentHealth < 1) {
+            currentHealth = 0;
+            isdead = true;
+        }
+        anim.SetTrigger("Hit");
     }
 }
