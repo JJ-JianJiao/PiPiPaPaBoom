@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,7 @@ public class Enemy : MonoBehaviour
     public float attackRange;
     public float skillRange;
     private float nextAttack = 0;
+    public bool hasSkill = true;
 
 
     public Transform pointA, pointB;    //guard pointA and pointB
@@ -54,6 +56,8 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        RemoveAttackTargetNull();
+
         if (isDead) {
             anim.SetBool("Die", isDead);
             return;
@@ -61,6 +65,16 @@ public class Enemy : MonoBehaviour
 
         currentState.OnUpdate(this);
         anim.SetInteger("state", animState);
+    }
+
+    private void RemoveAttackTargetNull()
+    {
+        for (int i = 0; i < attackTargetList.Count; i++)
+        {
+            if (attackTargetList[i] == null) {
+                attackTargetList.RemoveAt(i);
+            }
+        }
     }
 
     public void TransitionState(EnemyBaseState state) {
@@ -81,6 +95,7 @@ public class Enemy : MonoBehaviour
     }
 
     public virtual void SkillAttack() { //interact with the bomb
+        if (!hasSkill) return;
         if (Vector2.Distance(transform.position, targetPoint.position) <= skillRange)
         {
             if (Time.time > nextAttack)
@@ -104,9 +119,11 @@ public class Enemy : MonoBehaviour
         if (targetPoint.position.x > transform.position.x)
         {
             transform.rotation = Quaternion.Euler(0, 0, 0);
+            findPlayerSign.transform.rotation = Quaternion.Euler(0, 0, 0);
         }
         else {
             transform.rotation = Quaternion.Euler(0, 180, 0);
+            findPlayerSign.transform.rotation = Quaternion.Euler(0, 180, 0);
         }
     }
 
@@ -130,7 +147,8 @@ public class Enemy : MonoBehaviour
                 return;
             }
             else {
-                attackTargetList.Add(collision.transform);
+                if(hasSkill)
+                    attackTargetList.Add(collision.transform);
                 return;
             }
         }
@@ -143,21 +161,37 @@ public class Enemy : MonoBehaviour
         }
        
     }
-
+    
     public void OnTriggerExit2D(Collider2D collision)
     {
+        if (anim.GetCurrentAnimatorStateInfo(1).IsName("Attack") || isDead) return;
+
         if (attackTargetList.Contains(collision.transform))
             attackTargetList.Remove(collision.transform);
+
+        if (attackTargetList.Count == 0 && !(targetPoint == pointA || targetPoint == pointB)) {
+            StartCoroutine(OnAlarm("LostTarget_Sign"));
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        StartCoroutine(OnAlarm());
+        if (anim.GetCurrentAnimatorStateInfo(1).IsName("Attack")) return;
+
+        if (!isDead) {
+
+            if( (collision.CompareTag("Player")&&!collision.GetComponent<PilipalaController>().isdead) || collision.CompareTag("Bomb"))
+                StartCoroutine(OnAlarm("FindPlayer"));
+
+        }
     }
 
-    IEnumerator OnAlarm() {
+    IEnumerator OnAlarm(string clip) {
         findPlayerSign.SetActive(true);
-        yield return new WaitForSeconds(findPlayerSign.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0)[0].clip.length);
+        //isStiff = true;
+        findPlayerSign.GetComponent<Animator>().Play(clip);
+        yield return new WaitForSeconds(1f);
+        //isStiff = false;
         findPlayerSign.SetActive(false);
     }
 }
