@@ -204,7 +204,7 @@ MonoBehaviour:
   speed: 3.8
   attackRate: 1.5
   attackRange: 1.2
-  skillRange: 2
+  skillRange: 1.2
   hasSkill: 1
   pointA: {fileID: 534589781219563975}
   pointB: {fileID: 534589780227650842}
@@ -261,7 +261,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 11
-  addForce: 0
+  addForce: 6
+  pushPlayerForce: 10
+  forceDirection: {x: 1, y: 2}
 --- !u!61 &534589780698260143
 BoxCollider2D:
   m_ObjectHideFlags: 0

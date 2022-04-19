@@ -36,6 +36,7 @@ public class PilipalaController : MonoBehaviour, IDamageable
     public float currentHealth;
     public float fullHealth;
     public bool isdead;
+    public bool Invincible { get { return anim.GetCurrentAnimatorStateInfo(1).IsName("Pilipala_GetHurt");} }
 
     // Start is called before the first frame update
     void Start()
@@ -64,7 +65,9 @@ public class PilipalaController : MonoBehaviour, IDamageable
             rb.velocity = Vector2.zero;
             return;
         }
+
         PhysicsChek();
+        if (Invincible) return;
 
         Movement();
         Jump();
@@ -142,7 +145,7 @@ public class PilipalaController : MonoBehaviour, IDamageable
 
     public void GetHit(float damage)
     {
-        if (anim.GetCurrentAnimatorStateInfo(1).IsName("Pilipala_GetHurt"))
+        if (Invincible)
             return;
         currentHealth -= damage;
         if (currentHealth < 1) {

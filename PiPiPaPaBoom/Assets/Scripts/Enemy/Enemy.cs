@@ -7,6 +7,8 @@ public class Enemy : MonoBehaviour
 {
     EnemyBaseState currentState;
 
+    protected int FlipDirc { get { return transform.rotation.eulerAngles.y == 180 ? -1 : 1; } }
+
     [Header("Movement")]
     public float speed;
 
@@ -35,6 +37,9 @@ public class Enemy : MonoBehaviour
     public bool isDead;
 
     private GameObject findPlayerSign;
+
+    public bool HitAction { get { return anim.GetCurrentAnimatorStateInfo(1).IsName("Attack") || anim.GetCurrentAnimatorStateInfo(1).IsName("Skill"); } }
+
 
     public virtual void Init() {
         anim = GetComponent<Animator>();
@@ -108,10 +113,19 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void MovementToTarget() {
-
+    public virtual void MovementToTarget() {
         if (targetPoint == null) return;
+        if (HitAction) return;
+        //if (FlipDirc == 1)
+        //{
+        //    transform.position = Vector2.MoveTowards(transform.position, new Vector3(targetPoint.position.x - attackRange, targetPoint.position.y, targetPoint.position.z), speed * Time.deltaTime);
+
+        //}
+        //else {
+        //    transform.position = Vector2.MoveTowards(transform.position, new Vector3(targetPoint.position.x + attackRange, targetPoint.position.y, targetPoint.position.z), speed * Time.deltaTime);
+        //}
         transform.position = Vector2.MoveTowards(transform.position, targetPoint.position, speed * Time.deltaTime);
+
         FlipDireaction();
     }
 
@@ -122,6 +136,20 @@ public class Enemy : MonoBehaviour
             findPlayerSign.transform.rotation = Quaternion.Euler(0, 0, 0);
         }
         else {
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+            findPlayerSign.transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+    }
+
+    public void FlipDireaction(Transform destination)
+    {
+        if (destination.position.x > transform.position.x)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+            findPlayerSign.transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+        else
+        {
             transform.rotation = Quaternion.Euler(0, 180, 0);
             findPlayerSign.transform.rotation = Quaternion.Euler(0, 180, 0);
         }
