@@ -104,7 +104,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8741255101857793531
 Transform:
   m_ObjectHideFlags: 0
@@ -194,7 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b542dbc6c2277451baacae72453f2fc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 20
+  damage: 1
   addForce: 0
   pushPlayerForce: 10
   forceDirection: {x: 1, y: 0}
@@ -392,7 +392,7 @@ MonoBehaviour:
   anim: {fileID: 0}
   animState: 0
   currentHealth: 0
-  fullHealth: 100
+  fullHealth: 2
   isDead: 0
   scareRunPoint: {fileID: 8741255101542868150}
   isRunAway: 0

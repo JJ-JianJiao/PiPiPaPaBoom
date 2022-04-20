@@ -15,7 +15,7 @@ public class Bomb : MonoBehaviour
     public float explotionForce;
 
 
-    public float damage;
+    public int damage;
     private void Start()
     {
         anim = GetComponent<Animator>();

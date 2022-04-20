@@ -19,7 +19,7 @@ public class Captain : Enemy, IDamageable
         rb = GetComponent<Rigidbody2D>();
     }
 
-    public void GetHit(float damage)
+    public void GetHit(int damage)
     {
         currentHealth -= damage;
         if (currentHealth < 1)

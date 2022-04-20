@@ -7,13 +7,16 @@ public class Whale : Enemy, IDamageable
     private SpriteRenderer sr;
     public Transform swalowMouth;
 
+    public int swallowBombNum = 0;
+    public float increaseRate;
+
     public override void Init()
     {
         base.Init();
         sr = GetComponent<SpriteRenderer>();
     }
 
-    public void GetHit(float damage)
+    public void GetHit(int damage)
     {
         currentHealth -= damage;
         if (currentHealth < 1)
@@ -42,7 +45,14 @@ public class Whale : Enemy, IDamageable
         if (targetPoint != null && targetPoint.CompareTag("Bomb"))
         {
             Destroy(targetPoint.gameObject);
+            swallowBombNum++;
+            transform.localScale *= (1 + increaseRate * swallowBombNum) ;
 
+            if (swallowBombNum == 5) {
+                currentHealth = 0;
+                isDead = true;
+                sr.sortingOrder = -99;
+            }
         }
     }
 }

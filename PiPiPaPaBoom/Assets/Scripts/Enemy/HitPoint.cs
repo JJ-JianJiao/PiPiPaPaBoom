@@ -5,7 +5,7 @@ using UnityEngine;
 public class HitPoint : MonoBehaviour
 {
 
-    public float damage;
+    public int damage;
     public float addForce;
     public float pushPlayerForce;
     public Vector2 forceDirection;

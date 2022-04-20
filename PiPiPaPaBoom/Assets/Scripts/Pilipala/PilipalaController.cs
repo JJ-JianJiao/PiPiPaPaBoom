@@ -33,8 +33,8 @@ public class PilipalaController : MonoBehaviour, IDamageable
     public float attackRate;
 
     [Header("Player State")]
-    public float currentHealth;
-    public float fullHealth;
+    public int currentHealth;
+    public int fullHealth;
     public bool isdead;
     public bool Invincible { get { return anim.GetCurrentAnimatorStateInfo(1).IsName("Pilipala_GetHurt");} }
 
@@ -143,7 +143,7 @@ public class PilipalaController : MonoBehaviour, IDamageable
         Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
     }
 
-    public void GetHit(float damage)
+    public void GetHit(int damage)
     {
         if (Invincible)
             return;
@@ -153,5 +153,6 @@ public class PilipalaController : MonoBehaviour, IDamageable
             isdead = true;
         }
         anim.SetTrigger("Hit");
+        UIManager.instance.UpdatePlayerHealth(currentHealth);
     }
 }

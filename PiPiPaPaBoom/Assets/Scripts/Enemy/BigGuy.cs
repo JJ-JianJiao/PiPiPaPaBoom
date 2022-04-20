@@ -15,7 +15,7 @@ public class BigGuy : Enemy, IDamageable
         sr = GetComponent<SpriteRenderer>();
     }
 
-    public void GetHit(float damage)
+    public void GetHit(int damage)
     {
         currentHealth -= damage;
         if (currentHealth < 1)
@@ -41,6 +41,7 @@ public class BigGuy : Enemy, IDamageable
         if (pickupPoint.childCount!=0 && pickupPoint.GetChild(0).CompareTag("Bomb"))
         {
 
+            if (targetPoint == null || !targetPoint.CompareTag("Bomb")) return;
             targetPoint.transform.SetParent(null);
             targetPoint.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
             throwBormDirection.Normalize();

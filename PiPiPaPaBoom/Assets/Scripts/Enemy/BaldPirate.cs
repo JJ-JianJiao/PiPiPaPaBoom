@@ -12,7 +12,7 @@ public class BaldPirate : Enemy, IDamageable
         sr = GetComponent<SpriteRenderer>();
     }
 
-    public void GetHit(float damage)
+    public void GetHit(int damage)
     {
         currentHealth -= damage;
         if (currentHealth < 1)

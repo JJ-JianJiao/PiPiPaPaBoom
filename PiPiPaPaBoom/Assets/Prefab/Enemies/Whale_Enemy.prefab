@@ -71,7 +71,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b542dbc6c2277451baacae72453f2fc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 23
+  damage: 1
   addForce: 0
   pushPlayerForce: 6
   forceDirection: {x: 1, y: 0}
@@ -300,9 +300,11 @@ MonoBehaviour:
   anim: {fileID: 0}
   animState: 0
   currentHealth: 0
-  fullHealth: 120
+  fullHealth: 6
   isDead: 0
   swalowMouth: {fileID: 6319849392789202600}
+  swallowBombNum: 0
+  increaseRate: 0.05
 --- !u!95 &6319849392689636117
 Animator:
   serializedVersion: 4
@@ -427,7 +429,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6319849392923386418
 Transform:
   m_ObjectHideFlags: 0
