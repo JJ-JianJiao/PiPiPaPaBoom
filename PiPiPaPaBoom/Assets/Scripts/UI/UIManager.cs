@@ -23,4 +23,11 @@ public class UIManager : MonoBehaviour
             hearts[currentHealth].SetActive(false);
         }
     }
+
+    public void ResetPlayerHealth() {
+        foreach (var heart in hearts)
+        {
+            heart.SetActive(true);
+        }
+    }
 }

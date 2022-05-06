@@ -8,6 +8,8 @@ using UnityEngine.UI;
 public class DebugManager : MonoBehaviour
 {
 
+    static DebugManager instance;
+
     public Button reloadBtn;
     public Button generateEnemyBtn;
     public Button clearEnemyBtn;
@@ -17,6 +19,7 @@ public class DebugManager : MonoBehaviour
 
     public List<GameObject> enemyPrefabList = new List<GameObject>();
     public List<Transform> enemyGenratePositions = new List<Transform>();
+    public List<Vector3> enemyGenratePos = new List<Vector3>();
 
     public List<GameObject> enemies = new List<GameObject>();
 
@@ -24,6 +27,16 @@ public class DebugManager : MonoBehaviour
 
     private void Awake()
     {
+        if(instance == null)
+            instance = this;
+        else
+            Destroy(gameObject);
+
+        for (int i = 0; i < enemyGenratePositions.Count; i++)
+        {
+            enemyGenratePos.Add(enemyGenratePositions[i].position);
+        }
+
         reloadBtn.onClick.AddListener(ReloadBtn_OnClick);
         generateEnemyBtn.onClick.AddListener(GenerateEnemy);
         clearEnemyBtn.onClick.AddListener(ClearEnemies);
@@ -47,6 +60,8 @@ public class DebugManager : MonoBehaviour
 
     private void ReloadBtn_OnClick()
     {
+        UIManager.instance.ResetPlayerHealth();
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
@@ -76,7 +91,7 @@ public class DebugManager : MonoBehaviour
     }
 
     public void GenerateEnemy() {
-        var enemy = Instantiate(enemyPrefabList[currentIndex], enemyGenratePositions[currentIndex].position, Quaternion.identity);
+        var enemy = Instantiate(enemyPrefabList[currentIndex], enemyGenratePos[currentIndex], Quaternion.identity);
         enemies.Add(enemy);
     }
 
