@@ -819,7 +819,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &391457865
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5318,7 +5318,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -38.5804, y: -75.9931}
+  m_AnchoredPosition: {x: -38.580444, y: -75.9931}
   m_SizeDelta: {x: 180.4196, y: 89.6251}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1046346302
@@ -11627,7 +11627,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 1
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -13019,6 +13019,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bald Pirate_Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 534589781835791300, guid: 3878dfdcede534fafbdecec5cebe9705, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 534589781835791301, guid: 3878dfdcede534fafbdecec5cebe9705, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -13120,6 +13124,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cucumber_Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 1305630946894856601, guid: 0027f42ba2ee0454dbb5e418bfd37659, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0027f42ba2ee0454dbb5e418bfd37659, type: 3}
 --- !u!1001 &2441445714024209717
@@ -13176,6 +13184,10 @@ PrefabInstance:
     - target: {fileID: 2441445715580307603, guid: ebea06cbdcbe344e4b891a227ba0b23f, type: 3}
       propertyPath: m_Name
       value: Big Guy_Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 2441445715580307603, guid: ebea06cbdcbe344e4b891a227ba0b23f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ebea06cbdcbe344e4b891a227ba0b23f, type: 3}
@@ -13291,6 +13303,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Whale_Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 6319849392923386421, guid: cc0de590ac2624480b8ee3e9dce23217, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc0de590ac2624480b8ee3e9dce23217, type: 3}
 --- !u!1001 &6489160279343972129
@@ -13347,6 +13363,10 @@ PrefabInstance:
     - target: {fileID: 6489160279445767321, guid: 6af85cec9c83945329375be2848c6c59, type: 3}
       propertyPath: m_Name
       value: Pilipala
+      objectReference: {fileID: 0}
+    - target: {fileID: 6489160279445767321, guid: 6af85cec9c83945329375be2848c6c59, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6489160280193799630, guid: 6af85cec9c83945329375be2848c6c59, type: 3}
       propertyPath: fullHealth
@@ -13535,6 +13555,10 @@ PrefabInstance:
     - target: {fileID: 8741255101857793508, guid: 7a758e827f8fc4701b888b1d85828d86, type: 3}
       propertyPath: m_Name
       value: Captain_Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8741255101857793508, guid: 7a758e827f8fc4701b888b1d85828d86, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8741255101857793531, guid: 7a758e827f8fc4701b888b1d85828d86, type: 3}
       propertyPath: m_RootOrder

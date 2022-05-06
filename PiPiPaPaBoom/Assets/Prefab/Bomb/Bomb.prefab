@@ -163,5 +163,5 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 11136
-  explotionForce: 50
+  explotionForce: 10
   damage: 1
