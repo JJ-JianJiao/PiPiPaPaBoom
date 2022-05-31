@@ -3,11 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour,IDamageable
 {
     EnemyBaseState currentState;
 
     protected int FlipDirc { get { return transform.rotation.eulerAngles.y == 180 ? -1 : 1; } }
+
+    [Header("Boss")]
+    public bool isBoss;
 
     [Header("Movement")]
     public float speed;
@@ -50,6 +53,7 @@ public class Enemy : MonoBehaviour
     {
         Init();
         currentHealth = fullHealth;
+        UIManager.instance.SetBossHealth(currentHealth);
     }
 
     // Start is called before the first frame update
@@ -221,5 +225,19 @@ public class Enemy : MonoBehaviour
         yield return new WaitForSeconds(1f);
         //isStiff = false;
         findPlayerSign.SetActive(false);
+    }
+
+    public virtual void GetHit(int damage)
+    {
+        currentHealth -= damage;
+        if (currentHealth < 1)
+        {
+            currentHealth = 0;
+            isDead = true;            
+        }
+        if (isBoss) {
+            UIManager.instance?.UpdateBossHealth(currentHealth);
+        }
+        anim.SetTrigger("GetHit");
     }
 }

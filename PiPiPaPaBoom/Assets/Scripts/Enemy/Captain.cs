@@ -19,16 +19,25 @@ public class Captain : Enemy, IDamageable
         rb = GetComponent<Rigidbody2D>();
     }
 
-    public void GetHit(int damage)
+    //public void GetHit(int damage)
+    //{
+    //    currentHealth -= damage;
+    //    if (currentHealth < 1)
+    //    {
+    //        currentHealth = 0;
+    //        isDead = true;
+    //        sr.sortingOrder = -99;
+    //    }
+    //    anim.SetTrigger("GetHit");
+    //}
+
+    public override void GetHit(int damage)
     {
-        currentHealth -= damage;
+        base.GetHit(damage);
         if (currentHealth < 1)
         {
-            currentHealth = 0;
-            isDead = true;
-            sr.sortingOrder = -99;
+            sr.sortingOrder = -98;
         }
-        anim.SetTrigger("GetHit");
     }
 
     public void ScareRun() {
