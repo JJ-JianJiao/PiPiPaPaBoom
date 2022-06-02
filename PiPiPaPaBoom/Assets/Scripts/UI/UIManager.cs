@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 using TMPro;
 using System;
 
@@ -19,6 +20,10 @@ public class UIManager : MonoBehaviour
     public Button backToMainBtn;
     public Slider bossHealthSlider;
 
+    [SerializeField]
+    public PilipalaInputSys uiControls;
+    private bool pauseGame;
+
     private void Awake()
     {
         if (instance == null)
@@ -26,6 +31,9 @@ public class UIManager : MonoBehaviour
         else
             Destroy(this.gameObject);
         DontDestroyOnLoad(this);
+
+        uiControls = new PilipalaInputSys();
+        uiControls.UIController.PauseGame.performed += ctx => pauseGame = true;
     }
 
     private void Start()
@@ -36,14 +44,34 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Escape) ) {
+        //if (Input.GetKeyUp(KeyCode.Escape))
+        //{
+        //    if (pauseGame)
+        //    {
+        //        if (pauseMenuPanel.activeInHierarchy)
+        //            ResumeBtn_OnClick();
+        //        else
+        //            PauseBtn_OnClick();
+        //    }
+
+        //}
+
+        if (pauseGame)
+        {
             if (pauseMenuPanel.activeInHierarchy)
                 ResumeBtn_OnClick();
             else
                 PauseBtn_OnClick();
         }
-        
     }
+    //public void TriggerPasueBtn(InputAction.CallbackContext value) {
+
+    //    if (pauseMenuPanel.activeInHierarchy)
+    //        ResumeBtn_OnClick();
+    //    else
+    //        PauseBtn_OnClick();
+
+    //}
 
     public void UpdatePlayerHealth(int currentHealth) {
         for (; currentHealth < hearts.Count; currentHealth++)

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PilipalaController : MonoBehaviour, IDamageable
 {
@@ -38,12 +39,37 @@ public class PilipalaController : MonoBehaviour, IDamageable
     public bool isdead;
     public bool Invincible { get { return anim.GetCurrentAnimatorStateInfo(1).IsName("Pilipala_GetHurt");} }
 
-    // Start is called before the first frame update
+    private PilipalaInputSys controls;
+    Vector2 move = new Vector2();
+    bool triggerAttack;
+
+
+
+    private void Awake()
+    {
+        controls = new PilipalaInputSys();
+        controls.Player.Movement.performed += ctx => move = ctx.ReadValue<Vector2>();
+        controls.Player.Movement.canceled += ctx => move = Vector2.zero;
+        controls.Player.Jump.started += ctx => allowJump = isGround?true:false;
+        controls.Player.DropBomb.started += ctx => triggerAttack = true;
+        controls.Player.DropBomb.canceled += ctx => triggerAttack = false;
+    }
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         currentHealth = fullHealth;
+
+    }
+
+    private void OnEnable()
+    {
+        controls.Player.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controls.Player.Disable();
     }
 
     // Update is called once per frame
@@ -75,27 +101,31 @@ public class PilipalaController : MonoBehaviour, IDamageable
 
     void Movement() {
 
-        float horizontalInput = Input.GetAxisRaw("Horizontal"); 
+        //float horizontalInput = Input.GetAxisRaw("Horizontal");
+        //rb.velocity = new Vector2(speed * horizontalInput, rb.velocity.y);
+        //Flip(horizontalInput);
 
-        rb.velocity = new Vector2(speed * horizontalInput, rb.velocity.y);
-
-        Flip(horizontalInput);
-
+        rb.velocity = new Vector2(speed * move.x, rb.velocity.y);
+        Flip(move.x);
     }
 
     void Flip(float horizontalInput) {
         if (horizontalInput != 0)
         {
-            transform.localScale = new Vector3(horizontalInput, transform.localScale.y, transform.localScale.z);
+            transform.localScale = new Vector3(horizontalInput > 0 ? 1 : -1 , transform.localScale.y, transform.localScale.z);
         }
     }
 
     void CheckInput() {
-        if (Input.GetButtonDown("Jump") && isGround)
-        {
-            allowJump = true;
-        }
-        if (Input.GetKeyDown(KeyCode.K)) {
+        //if (Input.GetButtonDown("Jump") && isGround)
+        //{
+        //    allowJump = true;
+        //}
+        //if (Input.GetKeyDown(KeyCode.K)) {
+        //    Attack();
+        //}
+
+        if (triggerAttack) {
             Attack();
         }
     }
