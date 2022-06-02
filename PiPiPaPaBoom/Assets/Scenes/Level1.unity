@@ -12564,6 +12564,7 @@ MonoBehaviour:
   resumeBtn: {fileID: 1112899133}
   playAgainBtn: {fileID: 189054166}
   backToMainBtn: {fileID: 1527700848}
+  bossHealthSlider: {fileID: 91089335}
 --- !u!4 &1714499160 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2441445715580307602, guid: ebea06cbdcbe344e4b891a227ba0b23f, type: 3}
@@ -14480,6 +14481,10 @@ PrefabInstance:
     - target: {fileID: 1305630946894856601, guid: 0027f42ba2ee0454dbb5e418bfd37659, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1305630947150393848, guid: 0027f42ba2ee0454dbb5e418bfd37659, type: 3}
+      propertyPath: isBoss
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0027f42ba2ee0454dbb5e418bfd37659, type: 3}
