@@ -19,10 +19,11 @@ public class UIManager : MonoBehaviour
     public Button playAgainBtn;
     public Button backToMainBtn;
     public Slider bossHealthSlider;
+    public GameObject gameOverPanel;
 
-    [SerializeField]
-    public PilipalaInputSys uiControls;
-    private bool pauseGame;
+    //[SerializeField]
+    //public PilipalaInputSys uiControls;
+    //private bool pauseGame;
 
     private void Awake()
     {
@@ -32,8 +33,8 @@ public class UIManager : MonoBehaviour
             Destroy(this.gameObject);
         DontDestroyOnLoad(this);
 
-        uiControls = new PilipalaInputSys();
-        uiControls.UIController.PauseGame.performed += ctx => pauseGame = true;
+        //uiControls = new PilipalaInputSys();
+        //uiControls.UIController.PauseGame.performed += ctx => pauseGame = true;
     }
 
     private void Start()
@@ -44,25 +45,24 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        //if (Input.GetKeyUp(KeyCode.Escape))
-        //{
-        //    if (pauseGame)
-        //    {
-        //        if (pauseMenuPanel.activeInHierarchy)
-        //            ResumeBtn_OnClick();
-        //        else
-        //            PauseBtn_OnClick();
-        //    }
-
-        //}
-
-        if (pauseGame)
+        if (Input.GetKeyUp(KeyCode.Escape))
         {
+
             if (pauseMenuPanel.activeInHierarchy)
                 ResumeBtn_OnClick();
             else
                 PauseBtn_OnClick();
+
+
         }
+
+        //if (pauseGame)
+        //{
+        //    if (pauseMenuPanel.activeInHierarchy)
+        //        ResumeBtn_OnClick();
+        //    else
+        //        PauseBtn_OnClick();
+        //}
     }
     //public void TriggerPasueBtn(InputAction.CallbackContext value) {
 
@@ -102,10 +102,17 @@ public class UIManager : MonoBehaviour
     }
 
     public void SetBossHealth(float value) {
+        bossHealthSlider.transform.parent.gameObject.SetActive(true);
         bossHealthSlider.maxValue = value;
+        UpdateBossHealth(value);
     }
 
     public void UpdateBossHealth(float currentHealth) {
         bossHealthSlider.value = currentHealth;
+    }
+
+    public void ActiveGameOverPanel() {
+        gameOverPanel.SetActive(true);
+        pauseBtn.gameObject.SetActive(false);
     }
 }

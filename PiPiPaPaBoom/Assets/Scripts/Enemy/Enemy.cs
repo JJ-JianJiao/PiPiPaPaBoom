@@ -46,19 +46,23 @@ public class Enemy : MonoBehaviour,IDamageable
 
     public virtual void Init() {
         anim = GetComponent<Animator>();
-        findPlayerSign = transform.GetChild(0).gameObject;
+            findPlayerSign = transform.GetChild(0).gameObject;
+
     }
 
     private void Awake()
     {
         Init();
         currentHealth = fullHealth;
-        UIManager.instance.SetBossHealth(currentHealth);
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        UIManager.instance.SetBossHealth(currentHealth);
+
+        GameManager.Instance.RegistEnemy(this);
+
         TransitionState(patrolState);
     }
 
@@ -233,7 +237,8 @@ public class Enemy : MonoBehaviour,IDamageable
         if (currentHealth < 1)
         {
             currentHealth = 0;
-            isDead = true;            
+            isDead = true;
+            GameManager.Instance.RemoveEnemy(this);
         }
         if (isBoss) {
             UIManager.instance?.UpdateBossHealth(currentHealth);

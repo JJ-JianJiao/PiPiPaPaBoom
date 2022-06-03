@@ -59,7 +59,7 @@ public class PilipalaController : MonoBehaviour, IDamageable
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         currentHealth = fullHealth;
-
+        GameManager.Instance.playerController = this;
     }
 
     private void OnEnable()
@@ -181,6 +181,7 @@ public class PilipalaController : MonoBehaviour, IDamageable
         if (currentHealth < 1) {
             currentHealth = 0;
             isdead = true;
+            GameManager.Instance.GameOver();
         }
         anim.SetTrigger("Hit");
         UIManager.instance.UpdatePlayerHealth(currentHealth);
