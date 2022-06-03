@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 
 
 public enum DoorType { Entrance, Exit }
+public enum LevelType {level1,level2,level3,level4,level5, empty}
 
 public class Door : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class Door : MonoBehaviour
     Collider2D coli;
 
     GameObject doorSign;
+
+    public LevelType nextlevel = LevelType.empty;
 
     //PilipalaInputSys controls;
 
@@ -89,7 +92,9 @@ public class Door : MonoBehaviour
     }
 
     private void NextLevel() {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
+        if(nextlevel != LevelType.empty)
+            SceneManager.LoadScene( (int)nextlevel);
     }
 
     
