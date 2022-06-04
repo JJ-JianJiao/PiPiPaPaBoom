@@ -93,8 +93,10 @@ public class Door : MonoBehaviour
 
     private void NextLevel() {
 
-        if(nextlevel != LevelType.empty)
+        if(nextlevel != LevelType.empty) { 
             SceneManager.LoadScene( (int)nextlevel);
+            GameManager.Instance.SavePlayerData();
+        }
     }
 
     

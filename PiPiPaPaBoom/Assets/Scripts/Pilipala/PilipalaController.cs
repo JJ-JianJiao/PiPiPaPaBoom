@@ -60,6 +60,8 @@ public class PilipalaController : MonoBehaviour, IDamageable
         anim = GetComponent<Animator>();
         currentHealth = fullHealth;
         GameManager.Instance.playerController = this;
+        currentHealth = GameManager.Instance.LoadPlayerData();
+        UIManager.instance.UpdatePlayerHealth(currentHealth);
     }
 
     private void OnEnable()

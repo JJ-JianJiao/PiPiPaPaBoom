@@ -54,4 +54,26 @@ public class GameManager : MonoBehaviour
             exitDoors.Clear();
         }
     }
+
+    public void SavePlayerData() {
+        PlayerPrefs.SetInt("PlayerHealth", playerController.currentHealth);
+        PlayerPrefs.Save();
+    }
+
+    public int LoadPlayerData() {
+        if (!PlayerPrefs.HasKey("PlayerHealth")) {
+            PlayerPrefs.SetInt("PlayerHealth", playerController.fullHealth);
+        }
+
+        int getPlayerHealth = PlayerPrefs.GetInt("PlayerHealth");
+        return getPlayerHealth;
+    }
+
+    public void ResetGameState() {
+        exitDoors.Clear();
+        enemies.Clear();
+        playerController.currentHealth = playerController.fullHealth;
+        SavePlayerData();
+        UIManager.instance.UpdatePlayerHealth(playerController.currentHealth);
+    }
 }

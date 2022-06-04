@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using TMPro;
@@ -41,6 +42,7 @@ public class UIManager : MonoBehaviour
     {
         pauseBtn.onClick.AddListener(PauseBtn_OnClick);
         resumeBtn.onClick.AddListener(ResumeBtn_OnClick);
+        playAgainBtn.onClick.AddListener(PlayerAgainBtn_OnClick);
     }
 
     private void Update()
@@ -114,5 +116,12 @@ public class UIManager : MonoBehaviour
     public void ActiveGameOverPanel() {
         gameOverPanel.SetActive(true);
         pauseBtn.gameObject.SetActive(false);
+    }
+
+    public void PlayerAgainBtn_OnClick() {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        GameManager.Instance.ResetGameState();
+        ResetPlayerHealth();
+        gameOverPanel.SetActive(false);
     }
 }
