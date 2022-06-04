@@ -122,6 +122,9 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         GameManager.Instance.ResetGameState();
         ResetPlayerHealth();
-        gameOverPanel.SetActive(false);
+        if(gameOverPanel.activeInHierarchy) gameOverPanel.SetActive(false);
+        if(pauseMenuPanel.activeInHierarchy) pauseMenuPanel.SetActive(false);
+        if (Time.timeScale == 0) Time.timeScale = 1;
+
     }
 }
