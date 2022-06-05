@@ -60,6 +60,7 @@ public class Whale : Enemy, IDamageable
             if (swallowBombNum == 5) {
                 currentHealth = 0;
                 isDead = true;
+                GameManager.Instance.RemoveEnemy(this);
                 sr.sortingOrder = -99;
             }
         }

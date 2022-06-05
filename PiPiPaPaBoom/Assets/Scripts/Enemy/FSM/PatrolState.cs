@@ -7,6 +7,7 @@ public class PatrolState : EnemyBaseState
     public override void EnterState(Enemy enemy)
     {
         enemy.animState = 0;
+        //Debug.Log(enemy.animState);
         enemy.SwitchPoint();
     }
 
@@ -18,6 +19,8 @@ public class PatrolState : EnemyBaseState
         if (!enemy.anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
         {
             enemy.animState = 1;
+            //Debug.Log(enemy.animState);
+
             enemy.MovementToTarget();
         }
 

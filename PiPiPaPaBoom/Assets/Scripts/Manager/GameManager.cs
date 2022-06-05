@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class GameManager : MonoBehaviour
@@ -57,6 +58,7 @@ public class GameManager : MonoBehaviour
 
     public void SavePlayerData() {
         PlayerPrefs.SetInt("PlayerHealth", playerController.currentHealth);
+        PlayerPrefs.SetInt("Level", SceneManager.GetActiveScene().buildIndex);
         PlayerPrefs.Save();
     }
 
@@ -76,4 +78,7 @@ public class GameManager : MonoBehaviour
         SavePlayerData();
         UIManager.instance.UpdatePlayerHealth(playerController.currentHealth);
     }
+
+
+
 }

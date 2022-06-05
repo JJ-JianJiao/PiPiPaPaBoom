@@ -32,7 +32,7 @@ public class UIManager : MonoBehaviour
             instance = this;
         else
             Destroy(this.gameObject);
-        DontDestroyOnLoad(this);
+        //DontDestroyOnLoad(this);
 
         //uiControls = new PilipalaInputSys();
         //uiControls.UIController.PauseGame.performed += ctx => pauseGame = true;
@@ -42,7 +42,6 @@ public class UIManager : MonoBehaviour
     {
         pauseBtn.onClick.AddListener(PauseBtn_OnClick);
         resumeBtn.onClick.AddListener(ResumeBtn_OnClick);
-        playAgainBtn.onClick.AddListener(PlayerAgainBtn_OnClick);
     }
 
     private void Update()
@@ -126,5 +125,13 @@ public class UIManager : MonoBehaviour
         if(pauseMenuPanel.activeInHierarchy) pauseMenuPanel.SetActive(false);
         if (Time.timeScale == 0) Time.timeScale = 1;
 
+    }
+
+    public void BackToMain() {
+        GameManager.Instance.SavePlayerData();
+        SceneManager.LoadScene(0);
+        GameManager.Instance.enemies.Clear();
+        GameManager.Instance.exitDoors.Clear();
+        if (Time.timeScale == 0) Time.timeScale = 1;
     }
 }

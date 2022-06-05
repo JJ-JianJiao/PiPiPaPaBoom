@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 
 public enum DoorType { Entrance, Exit }
-public enum LevelType {level1,level2,level3,level4,level5, empty}
+public enum LevelType {level1 = 1,level2 =2 ,level3 = 3,level4 = 4,level5 = 5, empty =6}
 
 public class Door : MonoBehaviour
 {
@@ -99,5 +99,5 @@ public class Door : MonoBehaviour
         }
     }
 
-    
+
 }

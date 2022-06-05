@@ -77,6 +77,7 @@ public class PilipalaController : MonoBehaviour, IDamageable
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(Time.timeScale);
         if (isdead)
         {
             anim.SetBool("Dead", isdead);
