@@ -51,13 +51,19 @@ public class GameManager : MonoBehaviour
             {
                 door.OpenDoor();
                 door.EnableColi();
+#if UNITY_ANDROID ||UNITY_IOS
+                door.doorSign.SetActive(true);
+#endif
             }
             exitDoors.Clear();
         }
     }
 
     public void SavePlayerData() {
-        PlayerPrefs.SetInt("PlayerHealth", playerController.currentHealth);
+        if(playerController.isdead)
+            PlayerPrefs.SetInt("PlayerHealth", playerController.fullHealth);
+        else
+            PlayerPrefs.SetInt("PlayerHealth", playerController.currentHealth);
         PlayerPrefs.SetInt("Level", SceneManager.GetActiveScene().buildIndex);
         PlayerPrefs.Save();
     }

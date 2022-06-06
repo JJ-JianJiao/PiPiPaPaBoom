@@ -133,6 +133,17 @@ public partial class @PilipalaInputSys : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""7b59fbab-7b65-4f1e-8a77-d10b8b5cf3bc"",
+                    ""path"": ""<Joystick>/stick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""JoyStick"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""22a6460c-bd8b-496c-b645-d4cc08b2354d"",
                     ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
@@ -192,7 +203,7 @@ public partial class @PilipalaInputSys : IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Xbox Comtrol Scheme"",
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -248,6 +259,11 @@ public partial class @PilipalaInputSys : IInputActionCollection2, IDisposable
         {
             ""name"": ""Keyboard"",
             ""bindingGroup"": ""Keyboard"",
+            ""devices"": []
+        },
+        {
+            ""name"": ""JoyStick"",
+            ""bindingGroup"": ""JoyStick"",
             ""devices"": []
         }
     ]
@@ -422,6 +438,15 @@ public partial class @PilipalaInputSys : IInputActionCollection2, IDisposable
         {
             if (m_KeyboardSchemeIndex == -1) m_KeyboardSchemeIndex = asset.FindControlSchemeIndex("Keyboard");
             return asset.controlSchemes[m_KeyboardSchemeIndex];
+        }
+    }
+    private int m_JoyStickSchemeIndex = -1;
+    public InputControlScheme JoyStickScheme
+    {
+        get
+        {
+            if (m_JoyStickSchemeIndex == -1) m_JoyStickSchemeIndex = asset.FindControlSchemeIndex("JoyStick");
+            return asset.controlSchemes[m_JoyStickSchemeIndex];
         }
     }
     public interface IPlayerActions

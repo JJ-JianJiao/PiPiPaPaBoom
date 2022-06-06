@@ -39,20 +39,29 @@ public class PilipalaController : MonoBehaviour, IDamageable
     public bool isdead;
     public bool Invincible { get { return anim.GetCurrentAnimatorStateInfo(1).IsName("Pilipala_GetHurt");} }
 
+
+//#if UNITY_ANDROID
+    FixedJoystick joystick;
+    float moveStick;
+//#else
     private PilipalaInputSys controls;
     Vector2 move = new Vector2();
     bool triggerAttack;
+//#endif
+
 
 
 
     private void Awake()
     {
+//#if !UNITY_ANDROID
         controls = new PilipalaInputSys();
         controls.Player.Movement.performed += ctx => move = ctx.ReadValue<Vector2>();
         controls.Player.Movement.canceled += ctx => move = Vector2.zero;
         controls.Player.Jump.started += ctx => allowJump = isGround?true:false;
         controls.Player.DropBomb.started += ctx => triggerAttack = true;
         controls.Player.DropBomb.canceled += ctx => triggerAttack = false;
+//#endif
     }
     void Start()
     {
@@ -62,16 +71,29 @@ public class PilipalaController : MonoBehaviour, IDamageable
         GameManager.Instance.playerController = this;
         currentHealth = GameManager.Instance.LoadPlayerData();
         UIManager.instance.UpdatePlayerHealth(currentHealth);
+
+//#if UNITY_ANDROID
+        joystick = UIManager.instance.joystick;
+        //#endif
+        UIManager.instance.attackBtnJS.onClick.AddListener(Attack);
+        UIManager.instance.jumpBtnJS.onClick.AddListener(()=> allowJump = isGround ? true : false);
+
     }
 
     private void OnEnable()
     {
+//#if UNITY_ANDROID
+//#else
         controls.Player.Enable();
+//#endif
     }
 
     private void OnDisable()
     {
+//#if UNITY_ANDROID
+//#else
         controls.Player.Disable();
+//#endif
     }
 
     // Update is called once per frame
@@ -107,9 +129,26 @@ public class PilipalaController : MonoBehaviour, IDamageable
         //float horizontalInput = Input.GetAxisRaw("Horizontal");
         //rb.velocity = new Vector2(speed * horizontalInput, rb.velocity.y);
         //Flip(horizontalInput);
+//#if UNITY_ANDROID
+        moveStick = joystick.Horizontal;
 
-        rb.velocity = new Vector2(speed * move.x, rb.velocity.y);
-        Flip(move.x);
+        if (moveStick != 0)
+        {
+            rb.velocity = new Vector2(speed * moveStick, rb.velocity.y);
+            Flip(moveStick);
+            return;
+        }
+        //#else
+        if (!move.Equals(Vector2.zero))
+        {
+            rb.velocity = new Vector2(speed * move.x, rb.velocity.y);
+            Flip(move.x);
+            return;
+        }
+        if (move.Equals(Vector2.zero) && moveStick == 0) {
+            rb.velocity = new Vector2(speed * move.x, rb.velocity.y);
+        }
+        //#endif
     }
 
     void Flip(float horizontalInput) {
@@ -127,10 +166,13 @@ public class PilipalaController : MonoBehaviour, IDamageable
         //if (Input.GetKeyDown(KeyCode.K)) {
         //    Attack();
         //}
+//#if UNITY_ANDROID
 
+//#else
         if (triggerAttack) {
             Attack();
         }
+//#endif
     }
 
     void Jump() {
@@ -142,6 +184,13 @@ public class PilipalaController : MonoBehaviour, IDamageable
             jumpFx.transform.position = this.transform.position + jumpFxPositionOffset;
         }
     }
+
+//#if UNITY_ANDROID
+    public void JumpBtn() {
+        if(isGround)
+            allowJump = true;
+    }
+//#endif
 
     public void Attack() {
         if (Time.time > nextAttack) {

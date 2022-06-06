@@ -111,6 +111,17 @@
                 },
                 {
                     "name": "",
+                    "id": "7b59fbab-7b65-4f1e-8a77-d10b8b5cf3bc",
+                    "path": "<Joystick>/stick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "JoyStick",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "22a6460c-bd8b-496c-b645-d4cc08b2354d",
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
@@ -170,7 +181,7 @@
                     "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Xbox Comtrol Scheme",
                     "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -226,6 +237,11 @@
         {
             "name": "Keyboard",
             "bindingGroup": "Keyboard",
+            "devices": []
+        },
+        {
+            "name": "JoyStick",
+            "bindingGroup": "JoyStick",
             "devices": []
         }
     ]

@@ -61,6 +61,7 @@ public class Whale : Enemy, IDamageable
                 currentHealth = 0;
                 isDead = true;
                 GameManager.Instance.RemoveEnemy(this);
+                UIManager.instance.UpdateBossHealth(currentHealth);
                 sr.sortingOrder = -99;
             }
         }

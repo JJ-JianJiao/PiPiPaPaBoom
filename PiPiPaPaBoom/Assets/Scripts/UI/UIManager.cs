@@ -21,6 +21,11 @@ public class UIManager : MonoBehaviour
     public Button backToMainBtn;
     public Slider bossHealthSlider;
     public GameObject gameOverPanel;
+    public GameObject victoryPanel;
+
+    public FixedJoystick joystick;
+    public Button jumpBtnJS;
+    public Button attackBtnJS;
 
     //[SerializeField]
     //public PilipalaInputSys uiControls;
@@ -40,6 +45,12 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
+#if !UNITY_IOS && !UNITY_ANDROID
+        joystick.gameObject.SetActive(false);
+        jumpBtnJS.gameObject.SetActive(false);
+        attackBtnJS.gameObject.SetActive(false);
+#endif
+
         pauseBtn.onClick.AddListener(PauseBtn_OnClick);
         resumeBtn.onClick.AddListener(ResumeBtn_OnClick);
     }
@@ -133,5 +144,12 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.enemies.Clear();
         GameManager.Instance.exitDoors.Clear();
         if (Time.timeScale == 0) Time.timeScale = 1;
+    }
+
+    public void ActiveVictoryPanel() {
+        pauseBtn.gameObject.SetActive(false);
+        Time.timeScale = 0;
+        GameManager.Instance.playerController.gameObject.SetActive(false);
+        victoryPanel.SetActive(true);
     }
 }

@@ -17,7 +17,7 @@ public class Door : MonoBehaviour
 
     Collider2D coli;
 
-    GameObject doorSign;
+    public GameObject doorSign;
 
     public LevelType nextlevel = LevelType.empty;
 
@@ -45,12 +45,14 @@ public class Door : MonoBehaviour
 
     private void Update()
     {
+#if !UNITY_ANDROID ||UNITY_IOS
         if (doorSign.activeSelf) {
             if (Input.GetKeyDown(KeyCode.J)) {
                 NextLevel();
 
             }
         }
+#endif
     }
 
     private void Start()
@@ -75,6 +77,25 @@ public class Door : MonoBehaviour
         coli.enabled = false;
     }
 
+
+
+    private void NextLevel() {
+
+        if (nextlevel != LevelType.empty)
+        {
+            SceneManager.LoadScene((int)nextlevel);
+            GameManager.Instance.SavePlayerData();
+        }
+        else {
+            UIManager.instance.ActiveVictoryPanel();
+        }
+    }
+#if UNITY_ANDROID ||UNITY_IOS
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        NextLevel();
+    }
+#else
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -90,14 +111,6 @@ public class Door : MonoBehaviour
             doorSign.SetActive(false);
         }
     }
-
-    private void NextLevel() {
-
-        if(nextlevel != LevelType.empty) { 
-            SceneManager.LoadScene( (int)nextlevel);
-            GameManager.Instance.SavePlayerData();
-        }
-    }
-
+#endif
 
 }
