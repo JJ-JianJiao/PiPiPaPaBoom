@@ -27,6 +27,7 @@ public class PilipalaController : MonoBehaviour, IDamageable
     private Vector3 jumpFxPositionOffset =  new Vector3(0,-0.472f,0f);
     public GameObject fallFx;
     private Vector3 fallFxPositionOffset = new Vector3(0, -0.746f, 0f);
+    public GameObject runFx;
 
     [Header("Attack")]
     public GameObject bombPrefab;
@@ -132,9 +133,20 @@ public class PilipalaController : MonoBehaviour, IDamageable
 //#if UNITY_ANDROID
         moveStick = joystick.Horizontal;
 
+        if ((moveStick != 0 || move.x != 0) && isGround && Mathf.Abs( rb.velocity.x) > 1.5f)
+        {
+            Debug.Log(rb.velocity.x);
+            runFx.SetActive(true);
+        }
+        else {
+            runFx.SetActive(false);
+
+        }
+
         if (moveStick != 0)
         {
             rb.velocity = new Vector2(speed * moveStick, rb.velocity.y);
+  
             Flip(moveStick);
             return;
         }
@@ -143,10 +155,12 @@ public class PilipalaController : MonoBehaviour, IDamageable
         {
             rb.velocity = new Vector2(speed * move.x, rb.velocity.y);
             Flip(move.x);
+
             return;
         }
         if (move.Equals(Vector2.zero) && moveStick == 0) {
             rb.velocity = new Vector2(speed * move.x, rb.velocity.y);
+ 
         }
         //#endif
     }

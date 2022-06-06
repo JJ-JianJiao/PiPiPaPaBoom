@@ -185,6 +185,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6582022060009132867, guid: 47d908089398f41d1bbec516a13c169a, type: 3}
   m_PrefabInstance: {fileID: 6582022059982414352}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &71612498 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3446205631661831695, guid: 6af85cec9c83945329375be2848c6c59, type: 3}
+  m_PrefabInstance: {fileID: 6489160279343972129}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &90429779 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6489160280193799630, guid: 6af85cec9c83945329375be2848c6c59, type: 3}
@@ -16979,11 +16984,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6489160279445767320, guid: 6af85cec9c83945329375be2848c6c59, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.57
+      value: -10.41
       objectReference: {fileID: 0}
     - target: {fileID: 6489160279445767320, guid: 6af85cec9c83945329375be2848c6c59, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.25
+      value: 0.47
       objectReference: {fileID: 0}
     - target: {fileID: 6489160279445767320, guid: 6af85cec9c83945329375be2848c6c59, type: 3}
       propertyPath: m_LocalPosition.z
@@ -17021,6 +17026,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pilipala
       objectReference: {fileID: 0}
+    - target: {fileID: 6489160280193799630, guid: 6af85cec9c83945329375be2848c6c59, type: 3}
+      propertyPath: runFx
+      value: 
+      objectReference: {fileID: 71612498}
     - target: {fileID: 6489160280193799630, guid: 6af85cec9c83945329375be2848c6c59, type: 3}
       propertyPath: currentHealth
       value: 3
