@@ -32,7 +32,11 @@ public class MainMenu : MonoBehaviour
             continueBtn.transform.GetChild(0).GetComponent<TMP_Text>().color = Color.white;
 
         }
+    }
 
+    private void Start()
+    {
+        AudioManager.Instance.Play(Musicname.Main);
     }
 
     public void ContinueGame()

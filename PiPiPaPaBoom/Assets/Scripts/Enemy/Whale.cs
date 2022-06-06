@@ -54,6 +54,9 @@ public class Whale : Enemy, IDamageable
         if (targetPoint != null && targetPoint.CompareTag("Bomb"))
         {
             Destroy(targetPoint.gameObject);
+
+            AudioManager.Instance.Play(SoundName.Swallow);
+
             swallowBombNum++;
             transform.localScale *= (1 + increaseRate * swallowBombNum) ;
 
@@ -63,6 +66,18 @@ public class Whale : Enemy, IDamageable
                 GameManager.Instance.RemoveEnemy(this);
                 UIManager.instance.UpdateBossHealth(currentHealth);
                 sr.sortingOrder = -99;
+
+                
+
+                if (!isPlayDieSound)
+                {
+                    AudioManager.Instance.Play(SoundName.WhaleDie);
+                    AudioManager.Instance.Play(SoundName.BoomExplode);
+                    isPlayDieSound = true;
+                }
+
+
+
             }
         }
     }

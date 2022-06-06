@@ -53,6 +53,28 @@ public class UIManager : MonoBehaviour
 
         pauseBtn.onClick.AddListener(PauseBtn_OnClick);
         resumeBtn.onClick.AddListener(ResumeBtn_OnClick);
+
+        int sceneIndex = SceneManager.GetActiveScene().buildIndex;
+        switch (sceneIndex)
+        {
+            case 1:
+                AudioManager.Instance?.Play(Musicname.Level1);
+                break;
+            case 2:
+                AudioManager.Instance?.Play(Musicname.Level2);
+                break;
+            case 3:
+                AudioManager.Instance?.Play(Musicname.Level3);
+                break;
+            case 4:
+                AudioManager.Instance?.Play(Musicname.Level4);
+                break;
+            case 5:
+                AudioManager.Instance?.Play(Musicname.Level5);
+                break;
+            default:
+                break;
+        }
     }
 
     private void Update()

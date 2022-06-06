@@ -45,6 +45,9 @@ public class Bomb : MonoBehaviour
 
     //Animation Events
     public void Explotion() {
+
+        AudioManager.Instance?.Play(SoundName.BoomExplode);
+
         coll.enabled = false;
         Collider2D[] aroundObjs = Physics2D.OverlapCircleAll(transform.position, explotionRadius, targetLayer);
         rb.gravityScale = 0;

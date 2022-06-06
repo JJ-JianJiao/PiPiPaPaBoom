@@ -41,6 +41,8 @@ public class Enemy : MonoBehaviour,IDamageable
 
     private GameObject findPlayerSign;
 
+    protected bool isPlayDieSound;
+
     public bool HitAction { get { return anim.GetCurrentAnimatorStateInfo(1).IsName("Attack") || anim.GetCurrentAnimatorStateInfo(1).IsName("Skill"); } }
 
 
@@ -240,6 +242,18 @@ public class Enemy : MonoBehaviour,IDamageable
             isDead = true;
             GameManager.Instance.RemoveEnemy(this);
         }
+
+        if (currentHealth == 0)
+        {
+            if (!isPlayDieSound)
+            {
+                AudioManager.Instance?.Play(SoundName.EnimyDie);
+                isPlayDieSound = true;
+            }
+        }
+        else
+            AudioManager.Instance?.Play(SoundName.EnimyGetHurt);
+
         if (isBoss) {
             UIManager.instance?.UpdateBossHealth(currentHealth);
         }

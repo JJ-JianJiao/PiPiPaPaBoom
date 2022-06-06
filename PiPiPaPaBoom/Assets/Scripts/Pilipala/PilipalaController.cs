@@ -230,11 +230,21 @@ public class PilipalaController : MonoBehaviour, IDamageable
         if (Invincible)
             return;
         currentHealth -= damage;
+
+
         if (currentHealth < 1) {
             currentHealth = 0;
             isdead = true;
             GameManager.Instance.GameOver();
         }
+
+        if (currentHealth != 0) {
+            AudioManager.Instance?.Play(SoundName.PlayerGetHurt);
+        }
+        else
+            AudioManager.Instance?.Play(SoundName.PlayerDie);
+
+
         anim.SetTrigger("Hit");
         UIManager.instance.UpdatePlayerHealth(currentHealth);
     }

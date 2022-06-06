@@ -55,6 +55,8 @@ public class BigGuy : Enemy, IDamageable
             targetPoint.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
             throwBormDirection.Normalize();
             targetPoint.GetComponent<Rigidbody2D>().velocity = new Vector2(FlipDirc * throwBormDirection.x, throwBormDirection.y) * throwBombForce;
+
+            AudioManager.Instance.Play(SoundName.ThrowBall);
         }
     }
 }

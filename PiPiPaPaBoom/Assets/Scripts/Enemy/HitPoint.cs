@@ -24,9 +24,16 @@ public class HitPoint : MonoBehaviour
         }
         else if (other.CompareTag("Bomb")) {
             Debug.Log("Skill on Bomb");
+
+            
+
             transform.parent.GetComponent<Enemy>().attackTargetList.Remove(other.transform);
             int kickDirection = this.transform.parent.localEulerAngles.y == 180?-1:1;
             other.GetComponent<Rigidbody2D>().AddForce(new Vector2(kickDirection * 2, 1f) * addForce, ForceMode2D.Impulse);
+
+            if (transform.parent.parent.name.Contains("Bald")) {
+                AudioManager.Instance?.Play(SoundName.KickBall);
+            }
         }
     }
 }
