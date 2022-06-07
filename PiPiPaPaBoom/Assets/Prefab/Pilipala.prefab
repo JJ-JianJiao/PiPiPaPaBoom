@@ -509,6 +509,7 @@ MonoBehaviour:
     m_Bits: 64
   jumpFx: {fileID: 6489160279381667466}
   fallFx: {fileID: 6489160279103769642}
+  runFx: {fileID: 3446205631661831695}
   bombPrefab: {fileID: 248239685893276979, guid: 6fc066bdef96e46459aa84405fa3e23f, type: 3}
   nextAttack: 0
   attackRate: 1
@@ -611,5 +612,10 @@ PrefabInstance:
 --- !u!4 &211286991336430238 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3807228595325978983, guid: ed158897f4fa5284aa562a0787b15274, type: 3}
+  m_PrefabInstance: {fileID: 3907816445665973241}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3446205631661831695 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1866807574691505654, guid: ed158897f4fa5284aa562a0787b15274, type: 3}
   m_PrefabInstance: {fileID: 3907816445665973241}
   m_PrefabAsset: {fileID: 0}
