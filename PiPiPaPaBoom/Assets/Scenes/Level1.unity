@@ -185,11 +185,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6582022060009132867, guid: 47d908089398f41d1bbec516a13c169a, type: 3}
   m_PrefabInstance: {fileID: 6582022059982414352}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &71612498 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3446205631661831695, guid: 6af85cec9c83945329375be2848c6c59, type: 3}
-  m_PrefabInstance: {fileID: 6489160279343972129}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &90429779 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6489160280193799630, guid: 6af85cec9c83945329375be2848c6c59, type: 3}
@@ -482,14 +477,6 @@ PrefabInstance:
     - target: {fileID: 6332066033998220205, guid: 80401846ddf2e409ea9bf0b8125ed1e7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7279775404166529159, guid: 80401846ddf2e409ea9bf0b8125ed1e7, type: 3}
-      propertyPath: type
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7279775404166529159, guid: 80401846ddf2e409ea9bf0b8125ed1e7, type: 3}
-      propertyPath: nextlevel
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7562285206466531194, guid: 80401846ddf2e409ea9bf0b8125ed1e7, type: 3}
       propertyPath: m_Name
@@ -16984,11 +16971,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6489160279445767320, guid: 6af85cec9c83945329375be2848c6c59, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.41
+      value: -7.63
       objectReference: {fileID: 0}
     - target: {fileID: 6489160279445767320, guid: 6af85cec9c83945329375be2848c6c59, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.47
+      value: 0.21
       objectReference: {fileID: 0}
     - target: {fileID: 6489160279445767320, guid: 6af85cec9c83945329375be2848c6c59, type: 3}
       propertyPath: m_LocalPosition.z
@@ -17025,14 +17012,6 @@ PrefabInstance:
     - target: {fileID: 6489160279445767321, guid: 6af85cec9c83945329375be2848c6c59, type: 3}
       propertyPath: m_Name
       value: Pilipala
-      objectReference: {fileID: 0}
-    - target: {fileID: 6489160280193799630, guid: 6af85cec9c83945329375be2848c6c59, type: 3}
-      propertyPath: runFx
-      value: 
-      objectReference: {fileID: 71612498}
-    - target: {fileID: 6489160280193799630, guid: 6af85cec9c83945329375be2848c6c59, type: 3}
-      propertyPath: currentHealth
-      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6af85cec9c83945329375be2848c6c59, type: 3}
@@ -17374,6 +17353,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6332066033998220205, guid: 80401846ddf2e409ea9bf0b8125ed1e7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7279775404166529159, guid: 80401846ddf2e409ea9bf0b8125ed1e7, type: 3}
+      propertyPath: type
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7562285206466531194, guid: 80401846ddf2e409ea9bf0b8125ed1e7, type: 3}

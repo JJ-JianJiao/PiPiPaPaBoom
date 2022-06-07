@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
-
+using System;
 
 public enum DoorType { Entrance, Exit }
 public enum LevelType {level1 = 1,level2 =2 ,level3 = 3,level4 = 4,level5 = 5, empty =6}
@@ -48,22 +48,39 @@ public class Door : MonoBehaviour
 #if !UNITY_ANDROID ||UNITY_IOS
         if (doorSign.activeSelf) {
             if (Input.GetKeyDown(KeyCode.J)) {
-                NextLevel();
-
+                //NextLevel();
+                StartCoroutine(PlayerDoorIn());
             }
         }
 #endif
     }
 
+    IEnumerator PlayerDoorIn()
+    {
+        GameManager.Instance.playerController.TriggerDoorInAnim();
+        yield return new WaitForSeconds(1f);
+        NextLevel();
+    }
+
     private void Start()
     {
         if (type == DoorType.Entrance) {
-            doorAnim.Play("Close");
+            StartCoroutine(PlayerDoorOut());
         }
         if (type == DoorType.Exit) {
             GameManager.Instance.RegistExitDoor(this);
         }
     }
+
+
+    IEnumerator PlayerDoorOut() {
+        while (GameManager.Instance.playerController == null) {
+            yield return null;
+        }
+        GameManager.Instance.playerController.TriggerDoorOutAnim();
+        doorAnim.Play("Close");
+    }
+
 
     public void OpenDoor() {
         doorAnim.Play("Open");

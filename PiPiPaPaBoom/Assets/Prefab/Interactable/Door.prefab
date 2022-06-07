@@ -184,7 +184,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6760fa607abdf43f793399722e2b39c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  type: 1
+  doorSign: {fileID: 0}
+  nextlevel: 2
 --- !u!95 &8593207981675408111
 Animator:
   serializedVersion: 4

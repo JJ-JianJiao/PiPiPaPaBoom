@@ -513,9 +513,10 @@ MonoBehaviour:
   bombPrefab: {fileID: 248239685893276979, guid: 6fc066bdef96e46459aa84405fa3e23f, type: 3}
   nextAttack: 0
   attackRate: 1
-  currentHealth: 0
+  currentHealth: 3
   fullHealth: 3
   isdead: 0
+  outOfControl: 0
 --- !u!95 &6489160280193799633
 Animator:
   serializedVersion: 4

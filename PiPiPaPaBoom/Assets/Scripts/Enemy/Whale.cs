@@ -55,7 +55,7 @@ public class Whale : Enemy, IDamageable
         {
             Destroy(targetPoint.gameObject);
 
-            AudioManager.Instance.Play(SoundName.Swallow);
+            AudioManager.Instance?.Play(SoundName.Swallow);
 
             swallowBombNum++;
             transform.localScale *= (1 + increaseRate * swallowBombNum) ;
@@ -71,8 +71,8 @@ public class Whale : Enemy, IDamageable
 
                 if (!isPlayDieSound)
                 {
-                    AudioManager.Instance.Play(SoundName.WhaleDie);
-                    AudioManager.Instance.Play(SoundName.BoomExplode);
+                    AudioManager.Instance?.Play(SoundName.WhaleDie);
+                    AudioManager.Instance?.Play(SoundName.BoomExplode);
                     isPlayDieSound = true;
                 }
 

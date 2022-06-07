@@ -40,6 +40,7 @@ public class PilipalaController : MonoBehaviour, IDamageable
     public bool isdead;
     public bool Invincible { get { return anim.GetCurrentAnimatorStateInfo(1).IsName("Pilipala_GetHurt");} }
 
+    public bool outOfControl;
 
 //#if UNITY_ANDROID
     FixedJoystick joystick;
@@ -100,14 +101,15 @@ public class PilipalaController : MonoBehaviour, IDamageable
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(Time.timeScale);
+        //Debug.Log(Time.timeScale);
         if (isdead)
         {
             anim.SetBool("Dead", isdead);
             return;
         }
 
-        CheckInput();
+        if(!outOfControl)
+            CheckInput();
         //anim.SetBool("Dead", isdead);
     }
 
@@ -121,8 +123,11 @@ public class PilipalaController : MonoBehaviour, IDamageable
         PhysicsChek();
         if (Invincible) return;
 
-        Movement();
-        Jump();
+        if (!outOfControl)
+        {
+            Movement();
+            Jump();
+        }
     }
 
     void Movement() {
@@ -135,7 +140,7 @@ public class PilipalaController : MonoBehaviour, IDamageable
 
         if ((moveStick != 0 || move.x != 0) && isGround && Mathf.Abs( rb.velocity.x) > 1.5f)
         {
-            Debug.Log(rb.velocity.x);
+            //Debug.Log(rb.velocity.x);
             runFx.SetActive(true);
         }
         else {
@@ -261,5 +266,22 @@ public class PilipalaController : MonoBehaviour, IDamageable
 
         anim.SetTrigger("Hit");
         UIManager.instance.UpdatePlayerHealth(currentHealth);
+    }
+
+    public void TriggerDoorOutAnim() {
+        anim.SetTrigger("DoorOut");
+    }
+
+    public void TriggerDoorInAnim()
+    {
+        anim.SetTrigger("DoorIn");
+    }
+
+    public void ActiveOutOfControl() {
+        outOfControl = true;
+    }
+
+    public void InActiveOutOfControl() {
+        outOfControl = false;
     }
 }
