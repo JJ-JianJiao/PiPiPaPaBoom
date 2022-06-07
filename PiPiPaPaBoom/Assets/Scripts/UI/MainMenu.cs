@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
@@ -11,11 +12,16 @@ public class MainMenu : MonoBehaviour
     private Button continueBtn;
     private Button quiteBtn;
 
+    private Animator anim;
+
+    public PlayableDirector director;
+
     private void Awake()
     {
         newGameBtn = transform.GetChild(1).GetComponent<Button>();
         continueBtn = transform.GetChild(2).GetComponent<Button>();
         quiteBtn = transform.GetChild(3).GetComponent<Button>();
+        anim = GetComponent<Animator>();
 
         newGameBtn.onClick.AddListener(StartNewGame);
         continueBtn.onClick.AddListener(ContinueGame);
@@ -49,9 +55,25 @@ public class MainMenu : MonoBehaviour
     public void StartNewGame()
     {
         PlayerPrefs.DeleteAll();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        StartCoroutine(RunStartGameAnim());
+
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 
     }
+
+
+    IEnumerator RunStartGameAnim() {
+        director.Play();
+        Debug.Log("PlayerOnce");
+
+        while (director.state == PlayState.Playing) {
+            yield return null;
+
+        }
+        //Animator
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
 
     public void QuitGame() {
 
